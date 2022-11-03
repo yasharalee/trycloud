@@ -13,9 +13,9 @@ public class Hooks {
         Driver.getDriver().get(ConfigReader.getProperty("url"));
     }
 
- // @After
+  @After
     public  void tearDown(){
-     // Utils.Logout();
+      Utils.Logout();
         Driver.closeDriver();
     }
 
