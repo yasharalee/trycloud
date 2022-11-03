@@ -19,6 +19,9 @@ public class LoginPage {
     @FindBy(id = "password")
     public WebElement password;
 
+    @FindBy(xpath = "//div[@id='submit-wrapper']/following-sibling::p[1]")
+    public WebElement errorMsg;
+
     public void with(String user, String pass){
         username.sendKeys(user);
         password.sendKeys(pass + Keys.ENTER);

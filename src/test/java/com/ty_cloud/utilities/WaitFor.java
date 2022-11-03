@@ -27,4 +27,12 @@ public class WaitFor {
         wait.until(ExpectedConditions.alertIsPresent());
     }
 
+    public static void Seconds(int seconds){
+        try {
+            Thread.sleep(seconds* 1000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

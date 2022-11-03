@@ -25,7 +25,7 @@
                     <perCoreThreadCount>false</perCoreThreadCount>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
-                        <include>**/CukesRunner*.java</include>
+                        <include>**/CuksRunner*.java</include>
                     </includes>
                 </configuration>
             </plugin>

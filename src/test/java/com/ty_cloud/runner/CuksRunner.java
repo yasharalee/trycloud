@@ -10,8 +10,9 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/ty_cloud/step_defs",
         dryRun = false,
+       // tags = "@all but not (@login-sol or @invalid-login)"
         tags = ""
-        //tags = "but not @login-sol"
+
 )
 
 public class CuksRunner {}

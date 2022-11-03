@@ -22,4 +22,8 @@ public class LoginStepDefs {
         Assert.assertEquals("Dashboard - Trycloud QA", Driver.getDriver().getTitle());
     }
 
+    @Then("verify {string} message should be displayed")
+    public void verifyMessageShouldBeDisplayed(String msg) {
+        Assert.assertEquals(msg, login.errorMsg.getText());
+    }
 }
