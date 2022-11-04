@@ -6,13 +6,18 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        plugin = {"html:target/report.html","me.jvt.cucumber.report.PrettyReports:target/cucumber"},
+        plugin = {
+                "pretty", //gives info about scenario
+                "html:target/report.html",
+                "me.jvt.cucumber.report.PrettyReports:target/cucumber"
+        },
         features = "src/test/resources/features",
         glue = "com/ty_cloud/step_defs",
         dryRun = false,
-       tags = "@login-sol"
+        tags = "@add_file"
         //tags = ""
 
 )
 
-public class CuksRunner {}
+public class CuksRunner {
+}

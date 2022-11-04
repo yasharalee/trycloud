@@ -1,7 +1,7 @@
 @all
 Feature: As a user, I should be able to remove files from favorites and upload a file directly
 
-  @add-remove-file
+  @remove-file
   Scenario Outline: verify users to remove files to Favorites
     Given When the users log in with valid "<username>" and "<password>"
     When the user clicks the "Files" module
@@ -17,7 +17,7 @@ Feature: As a user, I should be able to remove files from favorites and upload a
       | User77   | Userpass123 |
       | User107  | Userpass123 |
 
-  @remove-file
+  @upload-file
   Scenario Outline: verify users to upload a file from Files
     Given When the users log in with valid "<username>" and "<password>"
     When the user clicks the "Files" module
