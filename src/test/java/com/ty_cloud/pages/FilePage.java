@@ -1,5 +1,6 @@
 package com.ty_cloud.pages;
 
+import com.ty_cloud.utilities.ConfigReader;
 import com.ty_cloud.utilities.Driver;
 import com.ty_cloud.utilities.WaitFor;
 import org.openqa.selenium.By;
@@ -34,26 +35,31 @@ public class FilePage {
     public List<WebElement> allFileElementsInUpperTable;
 
 
+    @FindBy(xpath = "//em[@class='label inner']//span[@class='desktop'][normalize-space()='a few seconds']")
+    public WebElement loader;
+
+    @FindBy(xpath = "//*[@id='uploadprogressbar']")
+    public WebElement progressBar;
 
 
     @FindBy(xpath = "(//tbody[@id='fileList'])[1]//span[@class='innernametext']")
     public List<WebElement> allFileElementsInLowerTable;
 
 
-
-
     public WebElement actionSubMenus(String subMenu) {
         return Driver.getDriver().findElement(By.xpath("//*[@id=\"fileList\"]//div[contains(@class, 'fileActionsMenu popovermenu bubble')]//span[.='" + subMenu + "']"));
     }
 
+    @FindBy(xpath = "//input[@id='file_upload_start']")
+    public WebElement inputFile;
 
 
     public WebElement addBtnSubMenu(String subMenu) {
         return Driver.getDriver().findElement(By.xpath("//span[normalize-space()='" + subMenu + "']"));
     }
 
-    public WebElement leftSideBarMenu(String menuName){
-        return Driver.getDriver().findElement(By.xpath("//div[@id='app-navigation']//a[.='"+menuName+"']"));
+    public WebElement leftSideBarMenu(String menuName) {
+        return Driver.getDriver().findElement(By.xpath("//div[@id='app-navigation']//a[.='" + menuName + "']"));
     }
 
     public void actionSubmenuClick(String submenu) {
@@ -62,10 +68,11 @@ public class FilePage {
 
 
     public List<String> nameOfAllAddedFiles = new ArrayList<>();
-    private boolean isIt(String str){
+
+    private boolean isIt(String str) {
         boolean isIt = false;
         WebElement is = Driver.getDriver().findElement(By.xpath("(//*[@id=\"fileList\"])[1]//li[@class=' action-favorite-container']//span[2]"));
-        if (is.getText().equals(str)){
+        if (is.getText().equals(str)) {
             isIt = true;
         }
         return isIt;
@@ -76,41 +83,44 @@ public class FilePage {
         for (int i = 0; i < actions.size(); i++) {
 
             WebElement action = actions.get(i);
+            WaitFor.clickable(action);
             action.click();
-            if (isIt("Remove from favorites")){
+            if (isIt("Remove from favorites")) {
                 action.click();
                 continue;
             }
             try {
                 actionSubMenus("Add to favorites").click();
-                nameOfAllAddedFiles.add( allFileElementsInLowerTable.get(i).getText());
-                WaitFor.Seconds(1);
-            }catch (RuntimeException e){
-                actionSubMenus("Remove from favorites").click();
+                nameOfAllAddedFiles.add(allFileElementsInLowerTable.get(i).getText());
+            } catch (RuntimeException e) {
+                e.getStackTrace();
             }
         }
     }
 
     public List<String> nameOfAllRemovedFiles = new ArrayList<>();
     public List<String> copy;
+
     public void removeAllFilesToFavorites() {
         for (int i = 0; i < actions.size(); i++) {
 
             WebElement action = actions.get(i);
+            WaitFor.clickable(action);
             action.click();
-            if (isIt("Add to favorites")){
+            if (isIt("Add to favorites")) {
                 action.click();
                 continue;
             }
             try {
                 actionSubMenus("Remove from favorites").click();
-                nameOfAllRemovedFiles.add( allFileElementsInLowerTable.get(i).getText());
-            }catch (RuntimeException e){
-                actionSubMenus("Add to favorites").click();
+                nameOfAllRemovedFiles.add(allFileElementsInLowerTable.get(i).getText());
+            } catch (RuntimeException e) {
+               e.getStackTrace();
             }
         }
         copy = new ArrayList<>(nameOfAllRemovedFiles);
     }
+
 
 
 }

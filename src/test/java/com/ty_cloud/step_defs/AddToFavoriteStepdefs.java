@@ -3,10 +3,13 @@ package com.ty_cloud.step_defs;
 import com.ty_cloud.pages.BasePage;
 import com.ty_cloud.pages.FavoritePage;
 import com.ty_cloud.pages.FilePage;
-import com.ty_cloud.utilities.Utils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class AddToFavoriteStepdefs extends BasePage {
@@ -21,6 +24,7 @@ public class AddToFavoriteStepdefs extends BasePage {
     }
     @When("user choose the Add to favorites option")
     public void user_choose_the_option() {
+
         filePage.addAllFilesToFavorites();
     }
 
@@ -32,18 +36,11 @@ public class AddToFavoriteStepdefs extends BasePage {
     @Then("Verify the chosen file is listed on the table")
     public void verify_the_chosen_file_is_listed_on_the_table() {
 
+        List<String> favorFiles = favor.filesOnFavorites.stream().map(WebElement::getText)
+                .filter(m->filePage.nameOfAllAddedFiles.contains(m))
+                .collect(Collectors.toList());
 
-        boolean res = true;
-
-        for (String s : filePage.nameOfAllAddedFiles) {
-            if (!favor.filesOnFavorites.contains(s)){
-                res = false;
-            }
-        }
-
-        Assert.assertTrue(res);
-
-
+        Assert.assertTrue(favorFiles.equals(filePage.nameOfAllAddedFiles));
 
     }
 

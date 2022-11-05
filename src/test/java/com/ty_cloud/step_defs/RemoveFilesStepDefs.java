@@ -6,6 +6,10 @@ import com.ty_cloud.utilities.WaitFor;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RemoveFilesStepDefs {
 
@@ -19,10 +23,10 @@ public class RemoveFilesStepDefs {
 
     @When("user choose the Remove from favorites option")
     public void user_choose_the_option() {
-        filePage.addAllFilesToFavorites();
-       // WaitFor.Seconds(5);
+//        filePage.addAllFilesToFavorites();
+//        WaitFor.Seconds(1);
         filePage.removeAllFilesToFavorites();
-       // WaitFor.Seconds(5);
+
     }
 
     @When("user click the {string} sub-module on the left side")
@@ -33,16 +37,12 @@ public class RemoveFilesStepDefs {
 
     @Then("Verify that the file is removed from the Favorites sub-module’s table")
     public void verify_that_the_file_is_removed_from_the_favorites_sub_module_s_table() {
-        boolean res = true;
-        for (int i = 0; i < filePage.copy.size(); i++) {
-            if (favor.filesOnFavorites.contains(filePage.copy.get(i))){
-                res = false;
-            }
-        }
 
-        WaitFor.Seconds(5);
+        List<String> favorFiles = favor.filesOnFavorites.stream().map(WebElement::getText)
+                .filter(m->filePage.nameOfAllRemovedFiles.contains(m))
+                .collect(Collectors.toList());
 
-      Assert.assertTrue(res);
+        Assert.assertEquals(0, favorFiles.size());
 
     }
 

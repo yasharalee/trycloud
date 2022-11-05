@@ -2,6 +2,7 @@ package com.ty_cloud.step_defs;
 
 
 import com.ty_cloud.pages.FilePage;
+import com.ty_cloud.utilities.ConfigReader;
 import com.ty_cloud.utilities.Driver;
 import com.ty_cloud.utilities.WaitFor;
 import io.cucumber.java.en.Then;
@@ -14,33 +15,28 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AddingFileStepDefs {
+public class UploadingFileStepDefs {
     FilePage filePage = new FilePage();
     String fileName= "";
 
     @When("the user clicks the add icon on the top")
     public void the_user_clicks_the_add_icon_on_the_top() {
+
         filePage.AddFileBtn.click();
+
     }
+
+
     @When("users uploads file with the {string} option")
     public void users_uploads_file_with_the_upload_file_option(String subMenu) {
-        String path = "C:/Users/yasha/OneDrive/Desktop/Java/trycloud/cool-pictures-for-nawpic-25.jpg";
-        int ind = path.lastIndexOf("/");
-        fileName = path.substring(ind+1);
 
-    // This lines below Aysun
+        WaitFor.Seconds(2);
 
-       WebElement inputEl =  Driver.getDriver().findElement(By.xpath("//input[@id='file_upload_start']"));
+      filePage.inputFile.sendKeys(ConfigReader.getProperty("filePath"));
 
+        WaitFor.invisibilityOf(filePage.progressBar);
 
-        JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-
-        js.executeScript("arguments[0].style.overflow='visible !important'; arguments[0].style.appearance='block !important'; arguments[0].style.display='block !important'",inputEl);
-
-        System.out.println(inputEl.getCssValue("overFlow"));
-
-       inputEl.sendKeys(path);
-
+        fileName = ConfigReader.getProperty("filePath").substring(ConfigReader.getProperty("filePath").lastIndexOf("/")+1, ConfigReader.getProperty("filePath").lastIndexOf("."));
 
     }
 
@@ -48,9 +44,6 @@ public class AddingFileStepDefs {
     @Then("verify the file is displayed on the page")
     public void verify_the_file_is_displayed_on_the_page() {
         List<String> actualFileList = filePage.allFileElementsInLowerTable.stream().map(WebElement::getText).collect(Collectors.toList());
-        WaitFor.Seconds(6);
         Assert.assertTrue(actualFileList.contains(fileName));
-
     }
-
 }
