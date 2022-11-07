@@ -22,9 +22,8 @@ Feature: As a user, I should be able to remove files from favorites and upload a
     Given When the users log in with valid "<username>" and "<password>"
     When the user clicks the "Files" module
     When the user clicks the add icon on the top
-    And users uploads file with the "Upload file" option
-
-
+    And user clicks Upload file and uploads
+      |filePath|
     Then verify the file is displayed on the page
 
 
@@ -32,6 +31,6 @@ Feature: As a user, I should be able to remove files from favorites and upload a
     Examples:
       | username | password    |
       | User17   | Userpass123 |
-#      | User47   | Userpass123 |
-#      | User77   | Userpass123 |
-#      | User107  | Userpass123 |
+      | User47   | Userpass123 |
+      | User77   | Userpass123 |
+      | User107  | Userpass123 |

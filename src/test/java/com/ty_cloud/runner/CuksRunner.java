@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/ty_cloud/step_defs",
         dryRun = false,
-        tags = "@all"
+        tags = "@storage-usage"
         //tags = ""
 
 )

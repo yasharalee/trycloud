@@ -35,4 +35,12 @@ public class WaitFor {
         }
     }
 
+    public static void milliSeconds(int seconds){
+        try {
+            Thread.sleep(seconds);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
