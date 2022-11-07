@@ -10,8 +10,6 @@ import org.junit.Assert;
 
 public class StorageUsage_StepDefs extends BasePage {
 
-    FilePage filePage = new FilePage();
-
     String originalValue;
     @When("user checks the current storage usage")
     public void user_checks_the_current_storage_usage() {
@@ -31,16 +29,8 @@ public class StorageUsage_StepDefs extends BasePage {
         int perivNumber = Utils.giveMeNumbersOnly(originalValue);
         int curNumbers = Utils.giveMeNumbersOnly(current);
 
-        System.out.println("perBefore = " + perBefore);
-        System.out.println("perAfter = " + perAfter);
-        System.out.println("perivNumber = " + perivNumber);
-        System.out.println("curNumbers = " + curNumbers);
-
-
         Assert.assertTrue(
              perBefore == perAfter? curNumbers > perivNumber : perBefore < perAfter
         );
-
     }
-
 }
