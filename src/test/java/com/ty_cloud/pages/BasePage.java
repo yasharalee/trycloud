@@ -39,6 +39,7 @@ public class BasePage {
     public WebElement usageInfoElement;
 
 
+
     @FindBy(xpath = "//button[@class='settings-button']")
     public WebElement settingsInsideMenu;
 

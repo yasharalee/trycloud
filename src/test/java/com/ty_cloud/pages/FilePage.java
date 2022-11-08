@@ -1,6 +1,7 @@
 package com.ty_cloud.pages;
 
 import com.ty_cloud.utilities.Driver;
+import com.ty_cloud.utilities.Utils;
 import com.ty_cloud.utilities.WaitFor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -46,24 +47,23 @@ public class FilePage {
     public WebElement commentsMenu;
 
 
-
     @FindBy(xpath = "//div[@class='message']")
     public WebElement appSidebarCommentInput;
 
     @FindBy(xpath = "//input[@class='submit icon-confirm has-tooltip']")
     public WebElement appSidebarCmmntEntrBtn;
 
-    public List<WebElement> appSidebarComments(){
-      return   Driver.getDriver().findElements(By.xpath("//li[@class='comment']//div[@class='message']"));
+    public List<WebElement> appSidebarComments() {
+        return Driver.getDriver().findElements(By.xpath("//li[@class='comment']//div[@class='message']"));
     }
 
 
     @FindBy(xpath = "//a[@class='action more icon icon-more has-tooltip']")
     public List<WebElement> appSidebarActions;
 
-    public WebElement appSidebarActionSubmenu(String submenu){
-     return    Driver.getDriver().findElement(By.xpath(
-     "(//div[@class='commentsModifyMenu popovermenu bubble menu menu-left']//span[.='"+submenu+"'])[2]"
+    public WebElement appSidebarActionSubmenu(String submenu) {
+        return Driver.getDriver().findElement(By.xpath(
+                "(//div[@class='commentsModifyMenu popovermenu bubble menu menu-left']//span[.='" + submenu + "'])[2]"
         ));
     }
 
@@ -71,8 +71,14 @@ public class FilePage {
     @FindBy(xpath = "//*[@id='uploadprogressbar']")
     public WebElement progressBar;
 
-    public List<WebElement> allElementsInLowerTable(){
-       return Driver.getDriver().findElements(By.xpath("(//tbody[@id='fileList'])[1]//span[@class='innernametext']"));
+
+    @FindBy(xpath = "(//tbody[@id='fileList'])[1]//span[@class='innernametext']")
+    public List<WebElement> allElementsInLowerTable;
+
+
+    public List<WebElement> findElementByTextInLowerTable(String text) {
+        List<WebElement> list = allElementsInLowerTable.stream().filter(m -> m.getText().equals(text)).collect(Collectors.toList());
+        return list;
     }
 
 
@@ -81,7 +87,7 @@ public class FilePage {
 
 
     public WebElement actionSubMenus(String subMenu) {
-        return Driver.getDriver().findElement(By.xpath("//div[contains(@class, 'fileActionsMenu popovermenu bubble')]//*[.='"+subMenu+"']"));
+        return Driver.getDriver().findElement(By.xpath("//div[contains(@class, 'fileActionsMenu popovermenu bubble')]//*[.='" + subMenu + "']/.."));
     }
 
     @FindBy(xpath = "//input[@id='file_upload_start']")
@@ -106,29 +112,29 @@ public class FilePage {
     public WebElement actionSubContainer;
 
 
-    public boolean isItFolder(String name){
+    public boolean isItFolder(String name) {
         boolean is = false;
         WebElement item;
-       try {
+        try {
             item = Driver.getDriver().findElement(By.xpath
-                   ("(//*[@id='fileList'])[1]//span[.='"+name+"']/..//preceding-sibling::div[1]/div"));
-        }catch (NoSuchElementException e){
+                    ("(//*[@id='fileList'])[1]//span[.='" + name + "']/..//preceding-sibling::div[1]/div"));
+        } catch (NoSuchElementException e) {
             return false;
-       }
+        }
         String styleVal = item.getAttribute("style");
-        if (styleVal.contains("folder.svg")){
+        if (styleVal.contains("folder.svg")) {
             is = true;
         }
         return is;
     }
 
 
-    public int randomNumUpTo(int zeroTo){
+    public int randomNumUpTo(int zeroTo) {
         Random random = new Random();
         return random.nextInt(zeroTo);
     }
 
-    public void generateFolder(){
+    public void generateFolder() {
         WaitFor.clickable(addBtn);
         addBtn.click();
         addBtnSubMenu("New folder").click();
@@ -141,62 +147,56 @@ public class FilePage {
 
     public List<String> nameOfAllAddedFiles = new ArrayList<>();
 
-    private boolean isIt(String str) {
+    public boolean subMenusTextIs(String str) {
         boolean isIt = false;
-        WebElement is = Driver.getDriver().findElement(By.xpath("(//*[@id=\"fileList\"])[1]//li[@class=' action-favorite-container']//span[2]"));
+        WebElement is;
+        try {
+            is = Driver.getDriver().findElement(By.xpath("(//*[@id=\"fileList\"])[1]//li[@class=' action-favorite-container']//span[2]"));
+        } catch (NoSuchElementException e) {
+            return false;
+        }
         if (is.getText().equals(str)) {
             isIt = true;
         }
         return isIt;
     }
 
-    public WebElement findFileByName(String fileName){
-      return   Driver.getDriver().findElement(By.xpath("(//*[@id=\"fileList\"])[1]//span[.='"+fileName+"']"));
+    public WebElement findFileByName(String fileName) {
+        return Driver.getDriver().findElement(By.xpath("(//*[@id=\"fileList\"])[1]//span[.='" + fileName + "']"));
     }
 
-    public void addAllFilesToFavorites() {
-
-        for (int i = 0; i < actions.size(); i++) {
-
-            WebElement action = actions.get(i);
-            WaitFor.clickable(action);
-            action.click();
-            if (isIt("Remove from favorites")) {
-                action.click();
-                continue;
-            }
-            try {
-                actionSubMenus("Add to favorites").click();
-                nameOfAllAddedFiles.add(allElementsInLowerTable().get(i).getText());
-            } catch (RuntimeException e) {
-                e.getStackTrace();
-            }
+    public void removeFromFavoriteSubmenu() {
+        int index = 0;
+        if (subMenusTextIs("Add to favorites")) {
+            List<String> names = Utils.giveMeElementTexes(allElementsInLowerTable);
+            System.out.println(names);
+            System.out.println(fileName);
+            index = names.indexOf(fileName.trim());
+            System.out.println(index);
+            actions.get(index).click();
+            index = randomNumUpTo(allElementsInLowerTable.size() - 1);
+            actions.get(index);
+            fileName = allElementsInLowerTable.get(index).getText();
+            removeFromFavoriteSubmenu();
+        } else {
+            actionSubMenus("Remove from favorites").click();
         }
     }
 
-    public List<String> nameOfAllRemovedFiles = new ArrayList<>();
-    public List<String> copy;
-
-    public void removeAllFilesToFavorites() {
-        for (int i = 0; i < actions.size(); i++) {
-
-            WebElement action = actions.get(i);
-            WaitFor.clickable(action);
-            action.click();
-            if (isIt("Add to favorites")) {
-                action.click();
-                continue;
-            }
-            try {
-                actionSubMenus("Remove from favorites").click();
-                nameOfAllRemovedFiles.add(allElementsInLowerTable().get(i).getText());
-            } catch (RuntimeException e) {
-               e.getStackTrace();
-            }
+    public void addToFavoriteSubmenu() {
+        int index;
+        if (subMenusTextIs("Remove from favorites")) {
+            List<String> names = Utils.giveMeElementTexes(allElementsInLowerTable);
+            index = names.indexOf(fileName);
+            actions.get(index).click();
+            index = randomNumUpTo(allElementsInLowerTable.size() - 1);
+            actions.get(index).click();
+            fileName = allElementsInLowerTable.get(index).getText();
+            addToFavoriteSubmenu();
+        } else {
+            actionSubMenus("Add to favorites").click();
         }
-        copy = new ArrayList<>(nameOfAllRemovedFiles);
     }
-
 
 
 }

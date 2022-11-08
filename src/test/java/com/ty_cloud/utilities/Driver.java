@@ -25,13 +25,13 @@ public class Driver {
                     WebDriverManager.chromedriver().setup();
                     driverPool.set(new ChromeDriver());
                     driverPool.get().manage().window().maximize();
-                    driverPool.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                    driverPool.get().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
                     break;
                 default:
                     WebDriverManager.firefoxdriver().setup();
                     driverPool.set(new FirefoxDriver());
                     driverPool.get().manage().window().maximize();
-                    driverPool.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                    driverPool.get().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
             }
         }
         return driverPool.get();

@@ -1,6 +1,7 @@
 package com.ty_cloud.step_defs;
 
 import com.ty_cloud.pages.FilePage;
+import com.ty_cloud.utilities.Utils;
 import com.ty_cloud.utilities.WaitFor;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -32,12 +33,7 @@ public class AddFolder_StepDefs {
     }
     @Then("Verify the {string} is displayed on the page")
     public void verify_the_is_displayed_on_the_page(String folderName) {
-        String newFolder = filePage.findFileByName(folderName).getText();;
-       if (newFolder.isBlank()){
-           System.out.println("Folder name did not found");
-       }
-
-        Assert.assertTrue(newFolder.contains(folderName));
-
+        WaitFor.Seconds(1);
+        Assert.assertTrue(Utils.giveMeElementTexes(filePage.allElementsInLowerTable).contains(folderName.trim()));
     }
 }

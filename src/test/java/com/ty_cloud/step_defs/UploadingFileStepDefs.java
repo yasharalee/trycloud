@@ -3,6 +3,7 @@ package com.ty_cloud.step_defs;
 
 import com.ty_cloud.pages.FilePage;
 import com.ty_cloud.utilities.ConfigReader;
+import com.ty_cloud.utilities.Utils;
 import com.ty_cloud.utilities.WaitFor;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -29,18 +30,20 @@ public class UploadingFileStepDefs {
 
         WaitFor.Seconds(2);
 
-      filePage.inputFile.sendKeys(ConfigReader.getProperty(path));
+        String tPath = ConfigReader.getProperty(path);
+
+      filePage.inputFile.sendKeys(tPath);
 
         WaitFor.invisibilityOf(filePage.progressBar);
 
-        filePage.fileName = ConfigReader.getProperty(path).substring(ConfigReader.getProperty(path).lastIndexOf("/")+1, ConfigReader.getProperty(path).lastIndexOf("."));
+        filePage.fileName = tPath.substring(tPath.lastIndexOf("/")+1, tPath.lastIndexOf("."));
 
     }
 
 
     @Then("verify the file is displayed on the page")
     public void verify_the_file_is_displayed_on_the_page() {
-        List<String> actualFileList = filePage.allElementsInLowerTable().stream().map(WebElement::getText).collect(Collectors.toList());
+        List<String> actualFileList = filePage.allElementsInLowerTable.stream().map(WebElement::getText).collect(Collectors.toList());
         Assert.assertTrue(actualFileList.contains(filePage.fileName));
     }
 }

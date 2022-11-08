@@ -2,6 +2,7 @@ package com.ty_cloud.step_defs;
 
 import com.ty_cloud.pages.FilePage;
 import com.ty_cloud.utilities.ConfigReader;
+import com.ty_cloud.utilities.Utils;
 import com.ty_cloud.utilities.WaitFor;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -21,7 +22,7 @@ public class UploadFileToFolder_StepDefs {
         Random random = new Random();
 
         WaitFor.Seconds(1);
-        List<WebElement> folders = filePage.allElementsInLowerTable().stream().filter(m -> filePage.isItFolder(m.getText())).collect(Collectors.toList());
+        List<WebElement> folders = filePage.allElementsInLowerTable.stream().filter(m -> filePage.isItFolder(m.getText())).collect(Collectors.toList());
 
         if (folders.size() == 0) {
             filePage.generateFolder();
@@ -39,11 +40,13 @@ public class UploadFileToFolder_StepDefs {
 
         WaitFor.Seconds(2);
 
-        filePage.inputFile.sendKeys(ConfigReader.getProperty(path));
+        String tPath = ConfigReader.getProperty(path);
+
+        filePage.inputFile.sendKeys(tPath);
 
         WaitFor.invisibilityOf(filePage.progressBar);
 
-        filePage.fileName = ConfigReader.getProperty(path).substring(ConfigReader.getProperty(path).lastIndexOf("/") + 1, ConfigReader.getProperty(path).lastIndexOf("."));
+        filePage.fileName = tPath.substring(tPath.lastIndexOf("/") + 1, tPath.lastIndexOf("."));
 
     }
 
@@ -59,6 +62,7 @@ public class UploadFileToFolder_StepDefs {
                             return name.trim();
                         })
                         .collect(Collectors.toList());
+        WaitFor.visibilityOf(filePage.allFilesInsideFolder.get(0));
         Assert.assertTrue(fileNames1.contains(filePage.fileName.trim()));
     }
 

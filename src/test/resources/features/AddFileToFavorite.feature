@@ -6,9 +6,10 @@
     Scenario Outline: Verify users to add files to Favorites
       Given When the users log in with valid "<username>" and "<password>"
       When the user clicks the "Files" module
-      When the user clicks action-icon from any file on the page
+      When the users click action-icon from random file  or folder on the page
       And user choose the Add to favorites option
-      And user click the Favorites sub-module on the left side
+      And user click the sub-module on the left side
+      |Favorites|
       Then Verify the chosen file is listed on the table
 
 

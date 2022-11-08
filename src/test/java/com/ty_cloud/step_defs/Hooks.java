@@ -17,7 +17,7 @@ public class Hooks {
 
 
 
-  @After
+ @After
     public  void tearDown(){
       Utils.Logout();
         Driver.closeDriver();

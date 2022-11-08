@@ -1,11 +1,11 @@
 Feature: As a user, I should be able to delete a file/folder.
   User Story: As a user, I should be able to delete a file/folder.
 
-  @remove-folder-from-page
+  @all @remove-folder-from-page
   Scenario Outline:
     Given When the users log in with valid "<username>" and "<password>"
     When the user clicks the "Files" module
-    When the users click action-icon from random file or folder on the page to remove
+    When the users click action-icon from random file or folder on the page
     And user choose the submenu from given below
       |Delete folder|
       |Delete file|

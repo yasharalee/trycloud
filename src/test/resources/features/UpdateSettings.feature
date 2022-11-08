@@ -2,7 +2,7 @@
 Feature: As a user, I should be able to click any button under settings.
   User Story: As a user, I should be able to update settings.
 
-  @update-settings
+  @all @update-settings
   Scenario Outline:
     Given When the users log in with valid "<username>" and "<password>"
     When the user clicks the "Files" module
@@ -17,7 +17,7 @@ Feature: As a user, I should be able to click any button under settings.
       | User107  | Userpass123 |
 
 
-    @storage-usage
+   @all @storage-usage
   Scenario Outline: : Verify users to see the app storage usage
       Given When the users log in with valid "<username>" and "<password>"
       When the user clicks the "Files" module

@@ -1,6 +1,6 @@
 Feature: As a user, I should be able to remove files from the favorites and upload a file directly
 
-  @add_directory
+  @all @add_directory
   Scenario Outline: Verify users can add the folder
     Given When the users log in with valid "<username>" and "<password>"
     When the user clicks the "Files" module
@@ -13,20 +13,20 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
 
     Examples:
       | username | password    | folder name |
-      | User17   | Userpass123 | Bugatti     |
-      | User47   | Userpass123 | Bugatti     |
-      | User77   | Userpass123 | Bugatti     |
-      | User107  | Userpass123 | Bugatti     |
+      | User17   | Userpass123 | Mercedes1   |
+      | User47   | Userpass123 | Mercedes1   |
+      | User77   | Userpass123 | Mercedes1   |
+      | User107  | Userpass123 | Mercedes1   |
 
 
-  @upload_file_inside_folder
+  @all @upload_file_inside_folder
   Scenario Outline: Verify users can upload a file inside a folder
     Given When the users log in with valid "<username>" and "<password>"
     When the user clicks the "Files" module
     And user choose a folder  from the page
     When the user clicks the add icon on the top
     And user uploads a file inside the chosen folder
-    |filePath4|
+      | filePath4 |
     Then Verify the File is displayed on the page
 
 

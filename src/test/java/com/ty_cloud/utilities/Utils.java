@@ -27,7 +27,10 @@ public class Utils {
 
 
     public static void Logout(){
-        Driver.getDriver().findElement(By.xpath("//div[@class='avatardiv avatardiv-shown']//img")).click();
+
+       WebElement avatar =  Driver.getDriver().findElement(By.xpath("//div[@class='avatardiv avatardiv-shown']//img"));
+        WaitFor.clickable(avatar);
+        avatar.click();
         Driver.getDriver().findElement(By.xpath("//a[normalize-space()='Log out']")).click();
     }
 
@@ -54,6 +57,10 @@ public class Utils {
             }
         }
       return   Integer.parseInt(num);
+    }
+
+    public static String correctPath(String url){
+        return url.replace("\\","/");
     }
 
 
