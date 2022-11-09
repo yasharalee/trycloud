@@ -22,6 +22,4 @@ import org.junit.runner.RunWith;
 
 )
 
-public class CuksRunner {
-        //it's d
-}
+public class CuksRunner {}
