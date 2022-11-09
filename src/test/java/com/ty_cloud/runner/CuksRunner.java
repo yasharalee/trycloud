@@ -17,10 +17,11 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/ty_cloud/step_defs",
         dryRun = false,
-        tags = "@send_message",
+        tags = "@all",
         publish = true
 
 )
 
 public class CuksRunner {
+        //it's d
 }
