@@ -13,10 +13,10 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
 
     Examples:
       | username | password    | folder name |
-      | User17   | Userpass123 | Mercedes1   |
-      | User47   | Userpass123 | Mercedes1   |
-      | User77   | Userpass123 | Mercedes1   |
-      | User107  | Userpass123 | Mercedes1   |
+      | User17   | Userpass123 | AudiA7      |
+      | User47   | Userpass123 | AudiA7      |
+      | User77   | Userpass123 | AudiA7      |
+      | User107  | Userpass123 | AudiA7      |
 
 
   @all @upload_file_inside_folder

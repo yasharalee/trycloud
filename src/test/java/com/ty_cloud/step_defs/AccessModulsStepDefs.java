@@ -27,7 +27,7 @@ public class AccessModulsStepDefs extends BasePage{
                 dum.add(each);
             }
         }
-        Assert.assertTrue(dum.size() == expectedModules.size());
+        Assert.assertEquals(dum.size(), expectedModules.size());
 
     }
 }

@@ -75,5 +75,9 @@ public class Utils {
         return dum.trim();
     }
 
+    public static String getTitle(){
+        return Driver.getDriver().getTitle();
+    }
+
 
 }
