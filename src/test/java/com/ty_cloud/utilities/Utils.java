@@ -1,5 +1,7 @@
 package com.ty_cloud.utilities;
 
+import com.ty_cloud.pages.BasePage;
+import com.ty_cloud.pages.FilePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -28,7 +30,7 @@ public class Utils {
 
     public static void Logout(){
 
-       WebElement avatar =  Driver.getDriver().findElement(By.xpath("//div[@class='avatardiv avatardiv-shown']//img"));
+       WebElement avatar =  new BasePage().rightSideModules("Avatar");
         WaitFor.clickable(avatar);
         avatar.click();
         Driver.getDriver().findElement(By.xpath("//a[normalize-space()='Log out']")).click();
@@ -57,10 +59,6 @@ public class Utils {
             }
         }
       return   Integer.parseInt(num);
-    }
-
-    public static String correctPath(String url){
-        return url.replace("\\","/");
     }
 
 
