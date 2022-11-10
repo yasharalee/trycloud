@@ -8,10 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FilePage {
@@ -92,6 +89,7 @@ public class FilePage {
 
     @FindBy(xpath = "//input[@id='file_upload_start']")
     public WebElement inputFile;
+
 
 
     public WebElement addBtnSubMenu(String subMenu) {

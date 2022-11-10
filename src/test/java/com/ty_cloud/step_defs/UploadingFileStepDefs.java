@@ -43,7 +43,8 @@ public class UploadingFileStepDefs {
 
     @Then("verify the file is displayed on the page")
     public void verify_the_file_is_displayed_on_the_page() {
-        List<String> actualFileList = filePage.allElementsInLowerTable.stream().map(WebElement::getText).collect(Collectors.toList());
+
+        List<String> actualFileList = Utils.giveMeElementTexes(filePage.allElementsInLowerTable);
         Assert.assertTrue(actualFileList.contains(filePage.fileName));
     }
 }

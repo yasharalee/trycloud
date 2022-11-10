@@ -41,6 +41,8 @@ public class AddToFavoriteStepdefs extends BasePage {
         }
     }
 
+
+
     @When("user choose the Add to favorites option")
     public void user_choose_the_option() {
         if(filePage.allElementsInLowerTable.size() > 0) {

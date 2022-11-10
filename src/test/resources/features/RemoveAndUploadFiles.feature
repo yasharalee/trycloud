@@ -23,7 +23,7 @@ Feature: As a user, I should be able to remove files from favorites and upload a
     When the user clicks the "Files" module
     When the user clicks the add icon on the top
     And user clicks Upload file and uploads
-      | filePath |
+      | filePath2 |
     Then verify the file is displayed on the page
 
 

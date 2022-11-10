@@ -1,5 +1,6 @@
 package com.ty_cloud.pages;
 
+import com.ty_cloud.utilities.Common;
 import com.ty_cloud.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -7,10 +8,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class BasePage {
+public class BasePage extends Common {
 
     public BasePage() {
         PageFactory.initElements(Driver.getDriver(), this);
@@ -49,6 +50,25 @@ public class BasePage {
     @FindBy(xpath = "//div[contains(@id, 'app-settings-content')]//input")
     public List<WebElement> allInputsUnderSettingsMenu;
 
+
+    @FindBy(xpath = "//div[@id='header-menu-unified-search']//input")
+    public WebElement searchInputOfContacts;
+
+
+    @FindBy(xpath = "//div[@class='full-name']")
+    public List<WebElement> contactList;
+
+
+        //TODO: this method is not working as should
+    public List < WebElement> searchResults(){
+         List < WebElement>  list= new ArrayList<>();
+
+            list.addAll(findElements("//span[@class='unified-search__result-content']//h3"));
+            list.addAll(findElements("//h4[@class='unified-search__result-line-two']"));
+
+        return list;
+    }
+
     public WebElement checkboxesOfSettingsByName(String menuText){
         return Driver.getDriver().findElement(By.xpath("" +
                 "//div[contains(@id, '-setting-')]//*[.='"+menuText+"']/preceding-sibling::input[1]"));
@@ -77,6 +97,15 @@ public class BasePage {
         return menu;
     }
 
+    public WebElement rightSideModules(String menuName){
+        Map<String, Integer> menus = new HashMap<>(Map.of(
+                "search",1,"notification",2,"contacts",3,"avatar",4
+        ));
+
+        return    Driver.getDriver().findElement(By.xpath("" +
+                "(//div[@class='header-right']/div)["+menus.get(menuName.toLowerCase())+"]"));
+
+    }
 
 
 

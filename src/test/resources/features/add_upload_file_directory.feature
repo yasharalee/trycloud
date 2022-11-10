@@ -13,10 +13,10 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
 
     Examples:
       | username | password    | folder name |
-      | User17   | Userpass123 | AudiA7      |
-      | User47   | Userpass123 | AudiA7      |
-      | User77   | Userpass123 | AudiA7      |
-      | User107  | Userpass123 | AudiA7      |
+      | User17   | Userpass123 | Ferrari     |
+      | User47   | Userpass123 | Ferrari     |
+      | User77   | Userpass123 | Ferrari     |
+      | User107  | Userpass123 | Ferrari     |
 
 
   @all @upload_file_inside_folder
@@ -26,7 +26,7 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
     And user choose a folder  from the page
     When the user clicks the add icon on the top
     And user uploads a file inside the chosen folder
-      | filePath4 |
+      | filePath1 |
     Then Verify the File is displayed on the page
 
 
