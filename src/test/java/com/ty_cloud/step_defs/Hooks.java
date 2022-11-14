@@ -18,8 +18,10 @@ public class Hooks {
 
 
  @After
-    public  void tearDown(){
-      Utils.Logout();
+    public  void tearDown(Scenario scenario){
+     if (!scenario.getName().equals("Verify user login fail with invalid credentials")){
+         Utils.Logout();
+     }
         Driver.closeDriver();
     }
 

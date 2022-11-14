@@ -17,7 +17,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/ty_cloud/step_defs",
         dryRun = false,
-        tags = "@verify_search_res",
+        tags = "@login-sol",
         publish = true
 
 )
