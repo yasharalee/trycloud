@@ -2,7 +2,7 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
 
   @all @add_directory
   Scenario Outline: Verify users can add the folder
-    Given When the users log in with valid "<username>" and "<password>"
+    Given user enters <credential com number> from credentials excel "<sheet>"
     When the user clicks the "Files" module
     When the user clicks the add icon on the top
     And users clicks on the submenu option
@@ -12,16 +12,16 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
     Then Verify the "<folder name>" is displayed on the page
 
     Examples:
-      | username | password    | folder name |
-      | User17   | Userpass123 | Ferrari     |
-      | User47   | Userpass123 | Ferrari     |
-      | User77   | Userpass123 | Ferrari     |
-      | User107  | Userpass123 | Ferrari     |
+      | sheet       | credential com number |folder name |
+      | credentials | 1                     |Ferrari     |
+      | credentials | 2                     |Ferrari     |
+      | credentials | 3                     |Ferrari     |
+      | credentials | 4                     |Ferrari     |
 
 
   @all @upload_file_inside_folder
   Scenario Outline: Verify users can upload a file inside a folder
-    Given When the users log in with valid "<username>" and "<password>"
+    Given user enters <credential com number> from credentials excel "<sheet>"
     When the user clicks the "Files" module
     And user choose a folder  from the page
     When the user clicks the add icon on the top
@@ -30,10 +30,9 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
     Then Verify the File is displayed on the page
 
 
-
     Examples:
-      | username | password    |
-      | User17   | Userpass123 |
-      | User47   | Userpass123 |
-      | User77   | Userpass123 |
-      | User107  | Userpass123 |
+      | sheet       | credential com number |
+      | credentials | 1                     |
+      | credentials | 2                     |
+      | credentials | 3                     |
+      | credentials | 4                     |

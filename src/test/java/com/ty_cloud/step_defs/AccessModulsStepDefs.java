@@ -15,10 +15,7 @@ public class AccessModulsStepDefs extends BasePage{
 
     LoginPage login = new LoginPage();
 
-    @Given("When the users log in with valid {string} and {string}")
-    public void when_the_users_log_in_with_valid_and(String user, String pass) {
-        login.with(user, pass);
-    }
+
     @Then("Then Verify the user see the following modules")
     public void then_verify_the_user_see_the_following(List<String> expectedModules){
         List<String> dum = new ArrayList<>();

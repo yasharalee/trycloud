@@ -16,7 +16,7 @@ Feature: As a user, I should be able to access to Talks module
 
     @send_message @Talk-comb
   Scenario Outline: verify users to send a message
-    Given When the users log in with valid "<username>" and "<password>"
+      Given user enters <credential com number> from credentials excel "<sheet>"
     When the user clicks the "Talk" module
     And user search user from the search box
       | User4 |
@@ -29,12 +29,9 @@ Feature: As a user, I should be able to access to Talks module
       | Hello from world |
 
 
-
-
-
-    Examples:
-      | username | password    |
-      | User17   | Userpass123 |
-      | User47   | Userpass123 |
-      | User77   | Userpass123 |
-      | User107  | Userpass123 |
+      Examples:
+        | sheet       | credential com number |
+        | credentials | 1                     |
+        | credentials | 2                     |
+        | credentials | 3                     |
+        | credentials | 4                     |

@@ -3,7 +3,7 @@ Feature: As a user, I should be able to delete a file/folder.
 
   @all @remove-folder-from-page
   Scenario Outline:
-    Given When the users log in with valid "<username>" and "<password>"
+    Given user enters <credential com number> from credentials excel "<sheet>"
     When the user clicks the "Files" module
     When the users click action-icon from random file or folder on the page
     And user choose the submenu from given below
@@ -11,11 +11,9 @@ Feature: As a user, I should be able to delete a file/folder.
       |Delete file|
     Then Verify the deleted file is not displayed on the page
 
-
-
     Examples:
-      | username | password    |
-      | User17   | Userpass123 |
-      | User47   | Userpass123 |
-      | User77   | Userpass123 |
-      | User107  | Userpass123 |
+      | sheet       | credential com number |
+      | credentials | 1                     |
+      | credentials | 2                     |
+      | credentials | 3                     |
+      | credentials | 4                     |
