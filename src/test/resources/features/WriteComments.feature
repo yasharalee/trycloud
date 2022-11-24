@@ -3,7 +3,7 @@ Feature: As a user, I should be able to write comments to files/folders.
 
   @all @write-comment
   Scenario Outline:
-    Given When the users log in with valid "<username>" and "<password>"
+    Given user enters <credential com number> from credentials excel "<sheet>"
     When the user clicks the "Files" module
     When the users click action-icon from random file or folder  on the page
     And user choose the submenu from given menu below
@@ -14,8 +14,8 @@ Feature: As a user, I should be able to write comments to files/folders.
 
 
     Examples:
-      | username | password    |
-      | User17   | Userpass123 |
-      | User47   | Userpass123 |
-      | User77   | Userpass123 |
-      | User107  | Userpass123 |
+      | sheet       | credential com number |
+      | credentials | 1                     |
+      | credentials | 2                     |
+      | credentials | 3                     |
+      | credentials | 4                     |

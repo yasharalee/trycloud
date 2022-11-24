@@ -6,12 +6,10 @@ import com.ty_cloud.utilities.WaitFor;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SearchFromDashboard extends BasePage {
+public class SearchUnderContactsModule extends BasePage {
 
     @When("users search any existing {string} name")
     public void users_search_any_existing_name(String keyWord) {

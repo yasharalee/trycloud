@@ -17,8 +17,8 @@ public class FilePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    public String fileName;
-    public WebElement fileElement;
+    public static String fileName;
+    public static WebElement fileElement;
 
     @FindBy(xpath = "//*[@id='headerSelection']/label")
     public WebElement checkboxSelectAll;

@@ -1,7 +1,6 @@
 package com.ty_cloud.step_defs;
 
 import com.ty_cloud.pages.BasePage;
-import com.ty_cloud.pages.FilePage;
 import com.ty_cloud.utilities.Driver;
 import com.ty_cloud.utilities.Utils;
 import com.ty_cloud.utilities.WaitFor;

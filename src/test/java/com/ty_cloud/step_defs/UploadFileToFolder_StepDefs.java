@@ -2,7 +2,6 @@ package com.ty_cloud.step_defs;
 
 import com.ty_cloud.pages.FilePage;
 import com.ty_cloud.utilities.ConfigReader;
-import com.ty_cloud.utilities.Utils;
 import com.ty_cloud.utilities.WaitFor;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
