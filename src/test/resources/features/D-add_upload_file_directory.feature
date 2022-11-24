@@ -13,10 +13,10 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
 
     Examples:
       | sheet       | credential com number |folder name |
-      | credentials | 1                     |Ferrari     |
-      | credentials | 2                     |Ferrari     |
-      | credentials | 3                     |Ferrari     |
-      | credentials | 4                     |Ferrari     |
+      | credentials | 1                     |Ferrari11     |
+      | credentials | 2                     |Ferrari11    |
+      | credentials | 3                     |Ferrari11     |
+      | credentials | 4                     |Ferrari11     |
 
 
   @all @upload_file_inside_folder

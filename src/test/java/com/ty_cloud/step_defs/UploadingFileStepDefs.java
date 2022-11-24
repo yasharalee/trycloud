@@ -8,10 +8,7 @@ import com.ty_cloud.utilities.WaitFor;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UploadingFileStepDefs {
     FilePage filePage = new FilePage();

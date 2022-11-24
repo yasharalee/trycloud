@@ -6,8 +6,7 @@
     Scenario Outline: Verify users to add files to Favorites
       Given user enters <credential com number> from credentials excel "<sheet>"
       When the user clicks the "Files" module
-      When the users click action-icon from random file  or folder on the page
-      And user choose the Add to favorites option
+      When the users click action-icon from random file or  folder and chooses "Add to favorites"
       And user click the sub-module on the left side
       |Favorites|
       Then Verify the chosen file is listed on the table
